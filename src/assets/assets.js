@@ -1,3 +1,5 @@
+import { PhoneIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/vue/24/outline'
+
 export const posts = [
     {
         title: "Regional Manager limited time",
@@ -59,4 +61,22 @@ export const popularTags = [
     "Solution",
     "Startup",
     "Technology",
+]
+
+export const contactInfos = [
+    {
+        title: 'Địa chỉ',
+        icon: MapPinIcon,
+        content: '1073/23 Cách Mạng Tháng 8, P.7, Q.Tân Bình, TP.HCM',
+    },
+    {
+        title: 'Liên hệ ngay',
+        icon: PhoneIcon,
+        content: '(+84) 0313-728-397\n(+84) 0313-728-397',
+    },
+    {
+        title: 'Gửi email',
+        icon: EnvelopeIcon,
+        content: 'info@themona.global\ninfo@themona.global',
+    },
 ]
