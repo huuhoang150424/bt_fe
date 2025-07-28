@@ -41,11 +41,12 @@
                 >Dịch vụ</a
               >
             </li>
-            <li class="">
-              <a href="#" class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out "
-                >Tin tức</a
-              >
-            </li>
+            <router-link
+              to="/news"
+              class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out"
+            >
+              Tin tức
+            </router-link>
             <li class="">
               <a href="#" class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out "
                 >Liên hệ</a
