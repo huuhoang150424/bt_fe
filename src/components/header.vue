@@ -46,11 +46,12 @@
                 >Tin tức</a
               >
             </li>
-            <li class="">
-              <a href="#" class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out "
-                >Liên hệ</a
-              >
-            </li>
+            <router-link
+              to="/contact"
+              class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out"
+            >
+              Liên hệ
+            </router-link>
           </ul>
         </div>
         <div class="px-[14px] py-[14px] rounded-[100%] border-[2px] border-gray-200 bg-white">

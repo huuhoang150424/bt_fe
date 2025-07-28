@@ -1,10 +1,98 @@
-<script setup>
-import { Button } from '@/components/ui/button'
-</script>
-
 <template>
-  <div class="">
+  <div class="wrapper py-12 space-y-16">
+    <!-- Thông tin liên hệ -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div
+        v-for="(info, i) in contactInfos"
+        :key="i"
+        class="bg-white shadow-md rounded-xl p-6 flex items-start gap-4"
+      >
+        <div class="bg-primary/10 text-primary p-3 rounded-xl">
+          <component :is="info.icon" class="w-10 h-10 text-violet-500" />
+        </div>
+        <div>
+          <h4 class="font-semibold text-base mb-1">{{ info.title }}</h4>
+          <p class="text-sm text-gray-600 whitespace-pre-line">{{ info.content }}</p>
+        </div>
+      </div>
+    </div>
 
+    <!-- Form liên hệ -->
+    <div class="bg-[#f9fafc] rounded-xl p-8">
+      <div class="mb-6 text-center">
+        <h2 class="text-3xl font-bold mb-2">Liên Hệ</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Nếu bạn có bất kỳ câu hỏi hoặc quan tâm nào về dịch vụ marketing của chúng tôi, xin vui lòng liên hệ với chúng tôi bằng cách sử dụng thông tin dưới đây.
+        </p>
+      </div>
 
+      <form @submit.prevent="submitForm" class="space-y-4">
+        <div class="grid md:grid-cols-2 gap-4">
+          <Input v-model="form.name" placeholder="Họ tên *" required />
+          <Input v-model="form.email" placeholder="Email *" required type="email" />
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <Input v-model="form.phone" placeholder="Số điện thoại *" required />
+          <Input v-model="form.subject" placeholder="Chủ đề *" required />
+        </div>
+        <Textarea v-model="form.message" rows="5" placeholder="Nội dung" required />
+        <Button type="submit" class="w-full mt-4">GỬI LIÊN HỆ</Button>
+      </form>
+    </div>
+
+    <!-- Google Map -->
+    <div class="overflow-hidden rounded-xl shadow-lg">
+      <iframe
+        class="w-full h-[400px] border-0"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.5257641072335!2d106.63759331411658!3d10.8465090608094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be09c6a9c6b%3A0x7e2fa4719d0a64f0!2zMTA3My8yMyDEkOG6oWNoIE3huqFuZyBUaOG6oW5nIDgsIFAuNywgUXXDoW4gQsOsbmgsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgUXXDoW4gQsOsbmgsIFTDom4gSOG7kyBN4bqhaQ!5e0!3m2!1svi!2s!4v1722233229055!5m2!1svi!2s"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
   </div>
 </template>
+
+<script setup>
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
+import { PhoneIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/vue/24/outline'
+import { reactive } from 'vue'
+
+const contactInfos = [
+  {
+    title: 'Địa chỉ',
+    icon: MapPinIcon,
+    content: '1073/23 Cách Mạng Tháng 8, P.7, Q.Tân Bình, TP.HCM',
+  },
+  {
+    title: 'Liên hệ ngay',
+    icon: PhoneIcon,
+    content: '(+84) 0313-728-397\n(+84) 0313-728-397',
+  },
+  {
+    title: 'Gửi email',
+    icon: EnvelopeIcon,
+    content: 'info@themona.global\ninfo@themona.global',
+  },
+]
+
+const form = reactive({
+  name: '',
+  email: '',
+  phone: '',
+  subject: '',
+  message: '',
+})
+
+const submitForm = () => {
+  console.log('Form submitted:', form)
+}
+</script>
+
+<style scoped>
+.wrapper {
+  @apply max-w-screen-xl mx-auto px-4;
+}
+</style>
