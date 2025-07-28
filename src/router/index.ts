@@ -1,10 +1,10 @@
-import ContactView from '@/views/contact.view.vue'
-import FqaView from '@/views/fqa.view.vue'
-import HomeView from '@/views/home.view.vue'
-import IntroduceView from '@/views/introduce.view.vue'
-import NewsView from '@/views/news.view.vue'
-import ServiceView from '@/views/service.view.vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import ContactView from '@/views/contact.view.vue';
+import FqaView from '@/views/fqa.view.vue';
+import HomeView from '@/views/home.view.vue';
+import IntroduceView from '@/views/introduce.view.vue';
+import NewsView from '@/views/news.view.vue';
+import ServiceView from '@/views/service.view.vue';
+import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   {
@@ -36,12 +36,12 @@ const routes = [
     path: '/service',
     name: 'service',
     component: ServiceView,
-  }
-]
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-})
+});
 
-export default router
+export default router;

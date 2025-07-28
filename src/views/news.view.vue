@@ -1,10 +1,7 @@
 <script setup>
-import { Button } from '@/components/ui/button'
+  import { Button } from '@/components/ui/button';
 </script>
 
 <template>
-  <div class="">
-
-
-  </div>
+  <div class=""></div>
 </template>
