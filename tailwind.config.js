@@ -4,7 +4,7 @@ export default {
     content: [
     './index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}',
-    './components/**/*.{vue,js,ts,jsx,tsx}', // Đảm bảo bao gồm các component của shadcn-vue
+    './components/**/*.{vue,js,ts,jsx,tsx}',
   ],
   theme: {
   	extend: {
@@ -14,6 +14,7 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+        primaryColor: '#684df4',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

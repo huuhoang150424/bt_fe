@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import MainLayout from './components/layout/main-layout.vue';
+
 </script>
 
 <template>
-  <div class="">
-    <h1 class="text-red-200"> hello</h1>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <MainLayout/>
 </template>
