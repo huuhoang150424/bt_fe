@@ -1,3 +1,6 @@
+
+
+
 <template lang="">
   <div class="">
     <div class="wrapper bg-primaryColor py-[8px]">
@@ -27,20 +30,27 @@
         <div class="">
           <ul class="flex gap-8">
             <li class="">
-              <a href="#" class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out "
+              <a
+                href="#"
+                class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out"
                 >Trang chủ</a
               >
             </li>
             <li class="">
-              <a href="#" class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out "
+              <a
+                href="#"
+                class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out"
                 >Giới thiệu</a
               >
             </li>
             <li class="">
-              <a href="#" class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out "
+              <a
+                href="#"
+                class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out"
                 >Dịch vụ</a
               >
             </li>
+
             <router-link
               to="/news"
               class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out"
@@ -53,15 +63,17 @@
             >
               liên hệ
             </router-link>
+
           </ul>
         </div>
-        <div class="px-[14px] py-[14px] rounded-[100%] border-[2px] border-gray-200 bg-white">
+        <div
+          class="px-[14px] py-[14px] rounded-[100%] border-[2px] border-gray-200 bg-white"
+        >
           <span>Tìm </span>
-
         </div>
       </div>
     </div>
-    <div class="">
+    <div v-if="route.name !== 'home'">
       <img
         src="../../public/bg-header.jpg"
         alt="Search Icon"
@@ -70,4 +82,8 @@
     </div>
   </div>
 </template>
-<script></script>
+<script setup>
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+</script>

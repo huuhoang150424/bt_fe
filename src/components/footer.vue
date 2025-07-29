@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+  import { Button } from '@/components/ui/button';
+  import { Input } from '@/components/ui/input';
 </script>
 
 <template>
   <div class="flex flex-col">
     <div
-      class="bg-[url('/footer_bg_2.png')] w-full h-[590px] bg-cover bg-no-repeat bg-[#080e1c] mt-[50px]"
+      class="bg-[url('/footer_bg_2.png')] w-full h-[590px] bg-cover bg-no-repeat bg-[#080e1c] "
     >
       <div class="flex items-center pt-[80px] px-4 max-w-7xl mx-auto wrapper">
         <div class="flex justify-between w-full h-[50px]">
@@ -81,19 +81,34 @@ import { Input } from "@/components/ui/input";
 
             <ul class="flex gap-4 flex-col">
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer " >> Liên kết</span>
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
+                  >> Liên kết</span
+                >
               </li>
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer " >> Dịch vụ</span>
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
+                  >> Dịch vụ</span
+                >
               </li>
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer " >> Faq</span>
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
+                  >> Faq</span
+                >
               </li>
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer " >> Dự án</span>
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
+                  >> Dự án</span
+                >
               </li>
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer " >> Liên hệ</span>
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
+                  >> Liên hệ</span
+                >
               </li>
             </ul>
           </li>
@@ -102,34 +117,46 @@ import { Input } from "@/components/ui/input";
             <div class="w-[50px] h-[4px] bg-primaryColor"></div>
             <ul class="flex gap-4 flex-col">
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer "
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
                   >> Quảng cáo trực tuyến</span
                 >
               </li>
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer " >> Sáng tạo nội dung</span>
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
+                  >> Sáng tạo nội dung</span
+                >
               </li>
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer "
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
                   >> Tiếp thị mạng xã hội
                 </span>
               </li>
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer "
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
                   >> Chiến lượt tùy chỉnh</span
                 >
               </li>
               <li class="">
-                <span class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer " >> Tối ưu hóa</span>
+                <span
+                  class="text-white text-[16px] hover:text-primaryColor transition duration-300 ease-in-out cursor-pointer"
+                  >> Tối ưu hóa</span
+                >
               </li>
             </ul>
           </li>
           <li class="flex flex-col gap-4 flex-1">
             <h2 class="text-white text-[26px] font-[600]">Bài viết mới nhất</h2>
             <div class="w-[50px] h-[4px] bg-primaryColor"></div>
-            <ul class="flex flex-col  gap-4">
-              <li class="flex gap-4 text-white ">
-                <img src="https://future-tech.monamedia.net/wp-content/uploads/2023/02/blog-s-1-4-80x80.jpg" class="rounded-[8px] "/>
+            <ul class="flex flex-col gap-4">
+              <li class="flex gap-4 text-white">
+                <img
+                  src="https://future-tech.monamedia.net/wp-content/uploads/2023/02/blog-s-1-4-80x80.jpg"
+                  class="rounded-[8px]"
+                />
                 <div class="">
                   <h2 class="text-[18px]">Regional Manager limited time</h2>
                   <div class="flex gap-[6px] items-center">
@@ -137,8 +164,11 @@ import { Input } from "@/components/ui/input";
                   </div>
                 </div>
               </li>
-                            <li class="flex gap-4 text-white ">
-                <img src="https://future-tech.monamedia.net/wp-content/uploads/2023/02/blog-s-1-4-80x80.jpg" class="rounded-[8px] "/>
+              <li class="flex gap-4 text-white">
+                <img
+                  src="https://future-tech.monamedia.net/wp-content/uploads/2023/02/blog-s-1-4-80x80.jpg"
+                  class="rounded-[8px]"
+                />
                 <div class="">
                   <h2 class="text-[18px]">Regional Manager limited time</h2>
                   <div class="flex gap-[6px] items-center">
