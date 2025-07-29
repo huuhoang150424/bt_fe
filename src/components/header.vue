@@ -25,7 +25,6 @@
           <img src="../../public/logo.png" alt="Logo" class="object-cover w-auto h-[50px]" />
         </router-link>
 
-
         <div>
           <ul class="flex gap-8">
             <li v-for=" item in navItems " :key=" item.name ">
@@ -43,8 +42,21 @@
       </div>
     </div>
 
-    <div v-if=" route.name !== 'home' ">
-      <img src="../../public/bg-header.jpg" alt="Search Icon" class="w-full object-cover" />
+    <div v-if=" route.name !== 'home' " class="relative">
+      <img src="../../public/bg-header.jpg" alt="Header Background" class="w-full object-cover" />
+      <div
+        class="absolute top-[30%] left-[50%] translate-x-[-50%] text-white  gap-2 flex flex-col justify-center text-center">
+        <span class="text-[38px] font-[600]">{{ route.meta.breadcrumb }}</span>
+        <div class="">
+
+          <span v-if=" route.meta.breadcrumb " class="flex items-center text-[18px] font-[500]">
+            <router-link to="/" class="hover:text-primaryColor transition text-[18px] font-[500]">Trang
+              chủ</router-link>
+            <span class="mx-1 text-[18px] font-[500]"> >> </span>
+            <span class="text-[18px] font-[500]">{{ route.meta.breadcrumb }}</span>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -57,9 +69,9 @@ const route = useRoute()
 
 const navItems = [
   { name: 'Trang chủ', path: '/' },
-  { name: 'Giới thiệu', path: '/about' },
-  { name: 'Dịch vụ', path: '/services' },
-  { name: 'Faq', path: '/faq' },
+  { name: 'Giới thiệu', path: '/introduce' },
+  { name: 'Dịch vụ', path: '/service' },
+  { name: 'Faq', path: '/fqa' },
   { name: 'Bảng giá', path: '/pricing' },
   { name: 'Tin tức', path: '/news' },
   { name: 'Liên hệ', path: '/contact' }
