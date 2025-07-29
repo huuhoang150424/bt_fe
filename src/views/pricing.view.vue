@@ -89,7 +89,7 @@ const testimonials = ref([
     </div>
 
     <div class="relative bg-cover bg-center py-20 px-4 rounded-lg overflow-hidden mb-20"
-         style="background-image: url('https://future-tech.monamedia.net/wp-content/uploads/2024/01/bg-contact-1.png');">
+        style="background-image: url('https://future-tech.monamedia.net/wp-content/uploads/2024/01/bg-contact-1.png');">
       <div class="absolute inset-0 bg-black opacity-50"></div>
       <div class="relative z-10 text-center text-white">
         <h2 class="text-4xl font-bold mb-4">Liên hệ ngay với chúng tôi nếu có <span class="text-violet-400">Thắc mắc</span></h2>
