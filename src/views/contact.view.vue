@@ -15,25 +15,25 @@
     </div>
 
     <!-- Form liên hệ -->
-    <div class="bg-[#f9fafc] rounded-xl p-8">
-        <div class="mb-6 text-center">
-            <h2 class="text-3xl font-bold mb-2">Liên Hệ</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-                Nếu bạn có bất kỳ câu hỏi hoặc quan tâm nào về dịch vụ marketing của chúng tôi, xin vui lòng liên hệ với chúng tôi bằng cách sử dụng thông tin dưới đây.
+    <div class="bg-[#f9fafc] rounded-xl p-8 w-2/3">
+        <div class="mb-6 text-left">
+            <h2 class="text-4xl text-gray-800 font-bold mb-2">Liên Hệ</h2>
+            <p class="max-w-2xl mt-2 text-gray-500 ">
+                Nếu bạn có bất kỳ câu hỏi hoặc quan tâm nào về dịch vụ marketing của chúng tôi, xin vui lòng liên hệ với chúng tôi bằng cách sử dụng thông tin dưới đây. Chúng tôi luôn sẵn lòng hỗ trợ bạn và sẽ cố gắng phản hồi trong thời gian sớm nhất.
             </p>
         </div>
 
         <form @submit.prevent="submitForm" class="space-y-4">
             <div class="grid md:grid-cols-2 gap-4">
-                <Input v-model="form.name" placeholder="Họ tên *" required />
-                <Input v-model="form.email" placeholder="Email *" required type="email" />
+                <Input v-model="form.name" placeholder="Họ tên *" required className='py-3 px-3'/>
+                <Input v-model="form.email" placeholder="Email *" required className='py-3 px-3' type="email" />
             </div>
             <div class="grid md:grid-cols-2 gap-4">
-                <Input v-model="form.phone" placeholder="Số điện thoại *" required />
-                <Input v-model="form.subject" placeholder="Chủ đề *" required />
+                <Input v-model="form.phone" placeholder="Số điện thoại *" required className='py-3 px-3' />
+                <Input v-model="form.subject" placeholder="Chủ đề *" required className='py-3 px-3' />
             </div>
-            <Textarea v-model="form.message" rows="5" placeholder="Nội dung" required />
-            <Button type="submit" class="w-full mt-4">GỬI LIÊN HỆ</Button>
+            <Textarea v-model="form.message" rows="5" placeholder="Nội dung" required className='py-3 px-3 w-full' />
+            <Button type="submit" class="w-full mt-4h-14 bg-violet-600 hover:bg-violet-700 text-white font-semibold py-6">GỬI LIÊN HỆ</Button>
       </form>
     </div>
 
