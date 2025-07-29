@@ -1,6 +1,6 @@
 import ContactView from '@/views/contact.view.vue';
 import FqaView from '@/views/fqa.view.vue';
-import HomeView from '@/views/home.view.vue';
+import HomeView from '@/views/home/home.view.vue';
 import IntroduceView from '@/views/introduce.view.vue';
 import NewsView from '@/views/news.view.vue';
 import ServiceView from '@/views/service.view.vue';

@@ -6,7 +6,7 @@
 <template>
   <div class="flex flex-col">
     <div
-      class="bg-[url('/footer_bg_2.png')] w-full h-[590px] bg-cover bg-no-repeat bg-[#080e1c] mt-[50px]"
+      class="bg-[url('/footer_bg_2.png')] w-full h-[590px] bg-cover bg-no-repeat bg-[#080e1c] "
     >
       <div class="flex items-center pt-[80px] px-4 max-w-7xl mx-auto wrapper">
         <div class="flex justify-between w-full h-[50px]">

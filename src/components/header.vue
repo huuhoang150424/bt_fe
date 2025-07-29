@@ -1,3 +1,6 @@
+
+
+
 <template lang="">
   <div class="">
     <div class="wrapper bg-primaryColor py-[8px]">
@@ -70,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="">
+    <div v-if="route.name !== 'home'">
       <img
         src="../../public/bg-header.jpg"
         alt="Search Icon"
@@ -79,4 +82,8 @@
     </div>
   </div>
 </template>
-<script></script>
+<script setup>
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+</script>
