@@ -5,6 +5,7 @@ import IntroduceView from '@/views/introduce.view.vue'
 import NewsView from '@/views/news.view.vue'
 import ServiceView from '@/views/service.view.vue'
 import PricingView from '@/views/pricing.view.vue'
+import newsDetailView from '@/views/news.detail.view.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 
@@ -33,7 +34,7 @@ const routes = [
     component: IntroduceView,
     meta: { breadcrumb: 'Giới thiệu' },
   },
-    {
+  {
     path: '/pricing',
     name: 'pricing',
     component: PricingView,
@@ -50,6 +51,12 @@ const routes = [
     name: 'service',
     component: ServiceView,
     meta: { breadcrumb: 'Dịch vụ' },
+  },
+  {
+    path: '/news/:id',
+    name: 'news-detail',
+    component: newsDetailView,
+    meta: { breadcrumb: 'Chi tiết' },
   },
 ]
 
