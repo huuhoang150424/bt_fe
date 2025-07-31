@@ -182,66 +182,89 @@
 </template>
 
 <script setup>
-  import { useRoute } from 'vue-router';
-  import { computed } from 'vue';
-  import { defineAsyncComponent } from 'vue';
-  import { posts } from '@/assets/assets.js';
-  import { Button } from '@/components/ui/button';
-  import { ArrowRight } from 'lucide-vue-next';
-  import {
-    UserIcon,
-    CalendarDaysIcon,
-    ChatBubbleLeftRightIcon,
-    TagIcon,
-  } from '@heroicons/vue/24/outline';
-  import { ref } from 'vue';
+    import { useRoute } from 'vue-router';
+    import { computed } from 'vue';
+    import { defineAsyncComponent } from 'vue';
+    import { posts } from '@/assets/assets.js';
+    import { Button } from '@/components/ui/button';
+    import { ArrowRight } from 'lucide-vue-next';
+    import {
+      UserIcon,
+      CalendarDaysIcon,
+      ChatBubbleLeftRightIcon,
+      TagIcon,
+    } from '@heroicons/vue/24/outline';
+    import { ref } from 'vue';
 
-  const commentForm = ref({
-    comment: '',
-    name: '',
-    email: '',
-    remember: false,
-  });
+    const commentForm = ref({
+      comment: '',
+      name: '',
+      email: '',
+      remember: false,
+    });
 
-  function submitComment() {
-    if (
-      !commentForm.value.comment ||
-      !commentForm.value.name ||
-      !commentForm.value.email
-    ) {
-      alert('Vui lòng điền đầy đủ các trường bắt buộc.');
-      return;
+    function submitComment() {
+      if (
+        !commentForm.value.comment ||
+        !commentForm.value.name ||
+        !commentForm.value.email
+      ) {
+        alert('Vui lòng điền đầy đủ các trường bắt buộc.');
+        return;
+      }
+
+      console.log('Bình luận:', commentForm.value);
+
+      // Reset nếu không muốn lưu thông tin
+      if (!commentForm.value.remember) {
+        commentForm.value = {
+          comment: '',
+          name: '',
+          email: '',
+          remember: false,
+        };
+      }
     }
 
-    console.log('Bình luận:', commentForm.value);
+    // Lấy ID từ URL
+  <<<<<<< HEAD
+    const route = useRoute();
+    const postId = route.params.id;
 
-    // Reset nếu không muốn lưu thông tin
-    if (!commentForm.value.remember) {
-      commentForm.value = {
-        comment: '',
-        name: '',
-        email: '',
-        remember: false,
-      };
-    }
-  }
+    // Tìm bài viết theo ID
+    const post = computed(() => posts.find(p => p.id === postId));
 
-  // Lấy ID từ URL
-  const route = useRoute();
-  const postId = route.params.id;
+    const comments = computed(() => post.value?.commentList || []);
 
-  // Tìm bài viết theo ID
-  const post = computed(() => posts.find(p => p.id === postId));
+  =======
 
-  const comments = computed(() => post.value?.commentList || []);
+    import { onMounted } from 'vue';
+    const route = useRoute();
+    const postId = route.params.id;
 
-  // Async sidebar
-  const Sidebar = defineAsyncComponent({
-    loader: () => import('./sidebar/sidebar.view.vue'),
-    loadingComponent: () => import('@/components/loading.vue'),
-    delay: 200,
-    timeout: 3000,
-  });
+    const post = ref(null);
+    const comments = ref([]);
+
+    onMounted(async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/post/${postId}`);
+        const data = await res.json();
+        post.value = data.data || null;
+        comments.value = post.value?.commentList || [];
+      } catch (e) {
+        post.value = null;
+        comments.value = [];
+      }
+    });
+
+  >>>>>>> fd71856 (call api news and news.detail)
+    // Async sidebar
+    const Sidebar = defineAsyncComponent({
+      loader: () => import('./sidebar/sidebar.view.vue'),
+      loadingComponent: () => import('@/components/loading.vue'),
+      delay: 200,
+      timeout: 3000,
+    });
 </script>
 
 <style scoped>
