@@ -1,3 +1,4 @@
+
 import { createRouter, createWebHistory } from 'vue-router';
 import MainLayout from '@/components/layout/main-layout.vue';
 import AdminLayout from '@/components/layout/admin-layout.vue';
@@ -101,8 +102,7 @@ const routes = [
       },
     ],
   },
-];
-
+]
 const router = createRouter({
   history: createWebHistory(),
   routes,
@@ -116,7 +116,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (to.name === 'login' && authStore.isLoggedIn) {
-    next('/admin/admin-dashboard');
+    next('/admin/dashboard');
     return;
   }
 
