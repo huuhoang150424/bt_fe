@@ -68,7 +68,7 @@ function goToDetail(id) {
 }
 
 const Sidebar = defineAsyncComponent({
-  loader: () => import('./sidebar/sidebar.view.vue'),
+  loader: () => import('../sidebar/sidebar.view.vue'),
   loadingComponent: () => import('@/components/loading.vue'),
   delay: 200,
   timeout: 3000,

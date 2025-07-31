@@ -11,9 +11,11 @@ import NewsView from '@/views/user/news.view.vue';
 import ServiceView from '@/views/user/service.view.vue';
 import DashboardView from '@/views/admin/dashbroad.view.vue';
 import { useAuthStore } from '@/stores/auth';
-import PricingView from '@/views/admin/pricing/pricing.view.vue';
+import PricingView from '@/views/user/pricing.view.vue';
+import PricingAdminView from '@/views/admin/pricing/pricing.view.vue';
 import CategoryView from '@/views/admin/category/category.view.vue';
 import PostView from '@/views/admin/post/post.view.vue';
+import NewsDetailView from '@/views/news.detail.view.vue';
 
 const routes = [
   {
@@ -64,6 +66,12 @@ const routes = [
         meta: { breadcrumb: 'Tin tức' },
       },
       {
+        path: '/news/:id',
+        name: 'news-detail',
+        component: NewsDetailView,
+        meta: { breadcrumb: 'Tin tức' },
+      },
+      {
         path: '/service',
         name: 'service',
         component: ServiceView,
@@ -90,8 +98,8 @@ const routes = [
       },
       {
         path: 'pricing',
-        name: 'pricing',
-        component: PricingView,
+        name: 'pricing-admin',
+        component: PricingAdminView,
         meta: { breadcrumb: 'Gói giá', requiresAuth: true },
       },
       {
