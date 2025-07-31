@@ -48,7 +48,7 @@ const handleSubmitForm = handleSubmit( async ( values ) =>
     const data = await response.json();
     console.log( 'Login response data:', data.data.access_token );
     authStore.login( data.data.access_token );
-    router.push('/admin/admin-dashboard');
+    router.push('/admin/dashboard');
   } catch ( error )
   {
     console.error( 'Lỗi đăng nhập:', error );

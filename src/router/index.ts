@@ -8,9 +8,11 @@ import HomeView from '@/views/user/home/home.view.vue';
 import IntroduceView from '@/views/user/introduce.view.vue';
 import NewsView from '@/views/user/news.view.vue';
 import ServiceView from '@/views/user/service.view.vue';
-import PricingView from '@/views/user/pricing.view.vue';
 import DashboardView from '@/views/admin/dashbroad.view.vue';
 import { useAuthStore } from '@/stores/auth';
+import PricingView from '@/views/admin/pricing/pricing.view.vue';
+import CategoryView from '@/views/admin/category/category.view.vue';
+import PostView from '@/views/admin/post/post.view.vue';
 
 const routes = [
   {
@@ -74,10 +76,28 @@ const routes = [
     meta: { requiresAuth: true },
     children: [
       {
-        path: 'admin-dashboard',
-        name: 'admin-dashboard',
+        path: 'dashboard',
+        name: 'dashboard',
         component: DashboardView,
         meta: { breadcrumb: 'Bảng điều khiển', requiresAuth: true },
+      },
+      {
+        path: 'categories',
+        name: 'categories',
+        component: CategoryView,
+        meta: { breadcrumb: 'Chuyên mục', requiresAuth: true },
+      },
+      {
+        path: 'pricing',
+        name: 'pricing',
+        component: PricingView,
+        meta: { breadcrumb: 'Gói giá', requiresAuth: true },
+      },
+      {
+        path: 'posts',
+        name: 'posts',
+        component: PostView,
+        meta: { breadcrumb: 'Bài viết', requiresAuth: true },
       },
     ],
   },
