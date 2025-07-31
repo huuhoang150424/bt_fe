@@ -87,7 +87,7 @@
               Danh Sách
             </router-link>
             <router-link
-              to="/admin/posts"
+              to="/admin/create-posts"
               class="block p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
               active-class="bg-gray-200 dark:bg-gray-700"
             >
@@ -122,13 +122,6 @@
             >
               Danh Sách
             </router-link>
-            <router-link
-              to="/admin/pricing"
-              class="block p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
-              active-class="bg-gray-200 dark:bg-gray-700"
-            >
-              Thêm Mới
-            </router-link>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="categories">
@@ -157,13 +150,6 @@
               active-class="bg-gray-200 dark:bg-gray-700"
             >
               Danh Sách
-            </router-link>
-            <router-link
-              to="/admin/categories"
-              class="block p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
-              active-class="bg-gray-200 dark:bg-gray-700"
-            >
-              Thêm Mới
             </router-link>
           </AccordionContent>
         </AccordionItem>

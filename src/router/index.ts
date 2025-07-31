@@ -15,6 +15,7 @@ import PricingAdminView from '@/views/admin/pricing/pricing.view.vue';
 import CategoryView from '@/views/admin/category/category.view.vue';
 import PostView from '@/views/admin/post/post.view.vue';
 import NewsDetailView from '@/views/news.detail.view.vue';
+import CreatePostView from '@/views/admin/post/create-post.view.vue';
 
 const routes = [
   {
@@ -105,6 +106,12 @@ const routes = [
         path: 'posts',
         name: 'posts',
         component: PostView,
+        meta: { breadcrumb: 'Bài viết', requiresAuth: true },
+      },
+      {
+        path: 'create-posts',
+        name: 'create-posts',
+        component: CreatePostView,
         meta: { breadcrumb: 'Bài viết', requiresAuth: true },
       },
     ],
