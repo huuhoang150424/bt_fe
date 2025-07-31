@@ -14,7 +14,7 @@ import PricingView from '@/views/user/pricing.view.vue';
 import PricingAdminView from '@/views/admin/pricing/pricing.view.vue';
 import CategoryView from '@/views/admin/category/category.view.vue';
 import PostView from '@/views/admin/post/post.view.vue';
-import NewsDetailView from '@/views/news.detail.view.vue';
+import NewsDetailView from '@/views/user/news.detail.view.vue';
 import CreatePostView from '@/views/admin/post/create-post.view.vue';
 
 const routes = [
