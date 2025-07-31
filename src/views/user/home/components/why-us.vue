@@ -75,7 +75,7 @@ import { Button } from '@/components/ui/button';
         </Button>
       </div>
       <div class="relative w-[47%]">
-        <img src="../../../../public/why_2_1.png" alt="" />
+        <img src="../../../../../public/why_2_1.png" alt="" />
         <div
           class="absolute top-[20%] left-[50%] translate-x-[-20%] border-[10px] translate-y-[-50%] text-white text-center px-[18px] py-[34px] bg-primaryColor rounded-[100%]"
         >

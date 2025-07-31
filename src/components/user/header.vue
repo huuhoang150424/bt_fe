@@ -22,7 +22,7 @@
     <div class="bg-[#e1eaff]">
       <div class="flex justify-between items-center wrapper py-[17px]">
         <router-link to="/">
-          <img src="../../public/logo.png" alt="Logo" class="object-cover w-auto h-[50px]" />
+          <img src="../../../public/logo.png" alt="Logo" class="object-cover w-auto h-[50px]" />
         </router-link>
 
         <div>
@@ -43,7 +43,7 @@
     </div>
 
     <div v-if=" route.name !== 'home' " class="relative">
-      <img src="../../public/bg-header.jpg" alt="Header Background" class="w-full object-cover" />
+      <img src="../../../public/bg-header.jpg" alt="Header Background" class="w-full object-cover" />
       <div
         class="absolute top-[30%] left-[50%] translate-x-[-50%] text-white  gap-2 flex flex-col justify-center text-center">
         <span class="text-[38px] font-[600]">{{ route.meta.breadcrumb }}</span>

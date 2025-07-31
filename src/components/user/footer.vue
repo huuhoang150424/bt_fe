@@ -12,7 +12,7 @@
         <div class="flex justify-between w-full h-[50px]">
           <div class="flex gap-8">
             <img
-              src="/bg-footer.png"
+              src="../../../public/bg-footer.png"
               alt="Logo"
               class="object-cover w-auto h-[50px]"
             />

@@ -46,7 +46,7 @@ import { ArrowRight, Play } from 'lucide-vue-next';
     </div>
     <div class="w-[50%]">
       <img
-        src="../../../../public/banner.png"
+        src="../../../../../public/banner.png"
         alt="Man in suit pointing"
         class="w-full h-[600px] object-cover"
       />
