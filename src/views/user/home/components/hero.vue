@@ -1,6 +1,6 @@
 <script setup>
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Play } from 'lucide-vue-next';
+  import { Button } from '@/components/ui/button';
+  import { ArrowRight, Play } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -16,8 +16,8 @@ import { ArrowRight, Play } from 'lucide-vue-next';
       </h1>
       <p class="text-gray-500 text-[15px] mt-[15px] font-[500]">
         Với dịch vụ Marketing của chúng tôi, bạn sẽ tận hưởng sự thăng hoa của
-        doanh nghiệp. Chúng tôi cung cấp các giải pháp Marketing mạnh mẽ để
-        gia tăng hiệu quả kinh doanh của bạn.
+        doanh nghiệp. Chúng tôi cung cấp các giải pháp Marketing mạnh mẽ để gia
+        tăng hiệu quả kinh doanh của bạn.
       </p>
       <div class="flex items-center gap-8 mt-[30px]">
         <Button
@@ -30,13 +30,13 @@ import { ArrowRight, Play } from 'lucide-vue-next';
           </div>
         </Button>
         <a href="#" class="flex items-center gap-4">
-          <div class="px-[15px] py-[15px] rounded-[100%] flex items-center gap-2 bg-primaryColor">
+          <div
+            class="px-[15px] py-[15px] rounded-[100%] flex items-center gap-2 bg-primaryColor"
+          >
             <Play class="text-white" />
           </div>
           <div>
-            <p class="text-[18px] text-gray-800 font-[700]">
-              Xem giới thiệu
-            </p>
+            <p class="text-[18px] text-gray-800 font-[700]">Xem giới thiệu</p>
             <p class="text-[15px] text-gray-500 font-[400] mt-[2px]">
               Đăng ký ngay
             </p>

@@ -1,5 +1,4 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
   <section
@@ -45,7 +44,9 @@
           <div
             class="absolute top-[-15%] left-[-15%] bg-primaryColor text-white rounded-[100%] px-[12px] py-[4px]"
           >
-            <span class="text-[40px] font-[700]">{{ String(i).padStart(2, '0') }}</span>
+            <span class="text-[40px] font-[700]">{{
+              String(i).padStart(2, '0')
+            }}</span>
           </div>
           <img
             :src="`https://future-tech.monamedia.net/wp-content/uploads/2024/02/process_card_${i}.svg`"
@@ -60,12 +61,11 @@
           </p>
         </li>
       </ul>
-      <div class="bg-[#141d38] w-full flex items-center justify-center px-[40px] h-[200px]">
+      <div
+        class="bg-[#141d38] w-full flex items-center justify-center px-[40px] h-[200px]"
+      >
         <ul class="flex items-center w-full justify-between">
-          <li
-            v-for="i in 5"
-            :key="i"
-          >
+          <li v-for="i in 5" :key="i">
             <img
               :src="`https://future-tech.monamedia.net/wp-content/uploads/2024/02/brand_2_${i + 1}.png`"
               alt=""

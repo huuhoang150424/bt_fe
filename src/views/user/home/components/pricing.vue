@@ -1,5 +1,5 @@
 <script setup>
-import { Button } from '@/components/ui/button';
+  import { Button } from '@/components/ui/button';
 </script>
 
 <template>
@@ -41,9 +41,7 @@ import { Button } from '@/components/ui/button';
         class="rounded-[12px] shadow-lg overflow-hidden bg-[#f5f5f5]"
       >
         <div class="relative bg-[#141d38] text-white">
-          <h1 class="text-[32px] font-[600] px-[35px] pt-[30px]">
-            Gói cơ bản
-          </h1>
+          <h1 class="text-[32px] font-[600] px-[35px] pt-[30px]">Gói cơ bản</h1>
           <p class="px-[35px]">Cung cấp các tính năng cần thiết</p>
           <div class="w-full h-[2px] bg-[#463aa8] my-6"></div>
           <div class="px-[35px] pb-[30px]">
@@ -54,11 +52,7 @@ import { Button } from '@/components/ui/button';
         </div>
         <div class="p-[25px]">
           <ul class="flex flex-col gap-4">
-            <li
-              v-for="j in 5"
-              :key="j"
-              class="flex items-center gap-2"
-            >
+            <li v-for="j in 5" :key="j" class="flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#22c55e"

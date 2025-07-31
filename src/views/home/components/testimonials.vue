@@ -1,5 +1,5 @@
 <script setup>
-import { MessageSquare } from 'lucide-vue-next';
+  import { MessageSquare } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -58,8 +58,8 @@ import { MessageSquare } from 'lucide-vue-next';
           <div class="p-[30px] w-[68%] flex flex-col justify-between gap-5">
             <p class="text-[15px] text-gray-400 font-[500]">
               Dịch vụ marketing của công ty này thực sự xuất sắc! Họ đã xây dựng
-              một chiến lược marketing toàn diện và hiệu quả cho doanh nghiệp của
-              tôi.
+              một chiến lược marketing toàn diện và hiệu quả cho doanh nghiệp
+              của tôi.
             </p>
             <div class="w-full h-[1px] bg-gray-200"></div>
             <div class="flex items-center justify-between">
@@ -70,10 +70,7 @@ import { MessageSquare } from 'lucide-vue-next';
                 </span>
               </div>
               <ul class="flex items-center gap-0">
-                <li
-                  v-for="j in 5"
-                  :key="j"
-                >
+                <li v-for="j in 5" :key="j">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"

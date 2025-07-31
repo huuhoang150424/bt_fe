@@ -1,4 +1,3 @@
-
 import { createRouter, createWebHistory } from 'vue-router';
 import MainLayout from '@/components/layout/main-layout.vue';
 import AdminLayout from '@/components/layout/admin-layout.vue';
@@ -110,7 +109,7 @@ const routes = [
       },
     ],
   },
-]
+];
 const router = createRouter({
   history: createWebHistory(),
   routes,

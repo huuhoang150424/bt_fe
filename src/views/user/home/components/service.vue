@@ -1,6 +1,6 @@
 <script setup>
-import { Button } from '@/components/ui/button';
-import { CalendarDays } from 'lucide-vue-next';
+  import { Button } from '@/components/ui/button';
+  import { CalendarDays } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -53,14 +53,18 @@ import { CalendarDays } from 'lucide-vue-next';
           </Button>
         </div>
       </div>
-      <div class="absolute top-[70%] mx-auto left-[50%] translate-x-[-50%] w-[85%]">
+      <div
+        class="absolute top-[70%] mx-auto left-[50%] translate-x-[-50%] w-[85%]"
+      >
         <ul class="grid grid-cols-4 grid-rows-1 gap-10">
           <li
             v-for="i in 4"
             :key="i"
             class="relative bg-white p-[30px] rounded-[12px] shadow-lg text-center"
           >
-            <h1 class="text-[22px] font-[600] text-gray-800 mb-[15px] mt-[30px]">
+            <h1
+              class="text-[22px] font-[600] text-gray-800 mb-[15px] mt-[30px]"
+            >
               Quảng cáo trực tiếp
             </h1>
             <p class="text-gray-500 text-[15px] font-[400] mb-5">

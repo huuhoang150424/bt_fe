@@ -1,5 +1,5 @@
 <script setup>
-import { Button } from '@/components/ui/button';
+  import { Button } from '@/components/ui/button';
 </script>
 
 <template>
@@ -41,18 +41,16 @@ import { Button } from '@/components/ui/button';
         </h1>
         <p class="my-[20px] text-gray-500 font-[400]">
           Chúng tôi chia sẻ những dự án thành công, tăng trưởng doanh số, tăng
-          cường nhận diện thương hiệu, tương tác khách hàng và những đánh giá tích
-          cực từ khách hàng. Điều này giúp khách hàng tiềm năng hiểu rõ hơn về khả
-          năng và sự chuyên nghiệp của chúng tôi trong việc cung cấp các dịch vụ
-          tiếp thị chất lượng cao.
+          cường nhận diện thương hiệu, tương tác khách hàng và những đánh giá
+          tích cực từ khách hàng. Điều này giúp khách hàng tiềm năng hiểu rõ hơn
+          về khả năng và sự chuyên nghiệp của chúng tôi trong việc cung cấp các
+          dịch vụ tiếp thị chất lượng cao.
         </p>
         <div class="flex items-center gap-4">
-          <div
-            v-for="i in 2"
-            :key="i"
-            class="flex items-center gap-4"
-          >
-            <div class="border-[5px] border-primaryColor rounded-[100%] px-[9px] py-[11px]">
+          <div v-for="i in 2" :key="i" class="flex items-center gap-4">
+            <div
+              class="border-[5px] border-primaryColor rounded-[100%] px-[9px] py-[11px]"
+            >
               <div class="px-[9px] py-[14px] bg-white rounded-[100%]">
                 <span class="text-gray-800 font-[600] text-[28px]">90%</span>
               </div>

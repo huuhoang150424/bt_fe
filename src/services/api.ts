@@ -2,7 +2,6 @@ import { ApiUrl } from '@/constant/api-url';
 import { useAuthStore } from '@/stores/auth';
 
 const api = {
-
   fetchWithAuth: async (url: string, options: RequestInit = {}) => {
     const authStore = useAuthStore();
     const token = authStore.token;
@@ -40,6 +39,29 @@ const api = {
     return api.fetchWithAuth(url, {
       ...options,
       method: 'GET',
+    });
+  },
+
+  put: async (url: string, data: any, options: RequestInit = {}) => {
+    return api.fetchWithAuth(url, {
+      ...options,
+      method: 'PUT',
+      body: data,
+    });
+  },
+
+  patch: async (url: string, data: any, options: RequestInit = {}) => {
+    return api.fetchWithAuth(url, {
+      ...options,
+      method: 'PATCH',
+      body: data,
+    });
+  },
+
+  delete: async (url: string, options: RequestInit = {}) => {
+    return api.fetchWithAuth(url, {
+      ...options,
+      method: 'DELETE',
     });
   },
 };

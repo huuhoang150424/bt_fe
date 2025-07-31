@@ -56,8 +56,6 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-<<<<<<< HEAD
-=======
   		},
   		keyframes: {
   			'accordion-down': {
@@ -80,7 +78,6 @@ export default {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
->>>>>>> 90bce0762bc6abc436905e6608bed34490f8e9b7
   		}
   	}
   },

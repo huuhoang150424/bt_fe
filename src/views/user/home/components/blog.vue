@@ -1,6 +1,6 @@
 <script setup>
-import { Button } from '@/components/ui/button';
-import { Database } from 'lucide-vue-next';
+  import { Button } from '@/components/ui/button';
+  import { Database } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -29,9 +29,7 @@ import { Database } from 'lucide-vue-next';
           src="https://future-tech.monamedia.net/wp-content/uploads/2024/02/title_shape_2.svg"
           alt=""
         />
-        <h3 class="text-[20px] font-[600] text-primaryColor">
-          Tin tức & Blog
-        </h3>
+        <h3 class="text-[20px] font-[600] text-primaryColor">Tin tức & Blog</h3>
       </div>
     </div>
     <h1 class="text-[36px] text-gray-800 font-[700]">

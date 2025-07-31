@@ -1,8 +1,8 @@
 <script setup>
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Phone } from 'lucide-vue-next';
+  import { Button } from '@/components/ui/button';
+  import { Input } from '@/components/ui/input';
+  import { Textarea } from '@/components/ui/textarea';
+  import { Phone } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -34,7 +34,9 @@ import { Phone } from 'lucide-vue-next';
             :key="i"
             class="bg-white p-[30px] rounded-[12px] shadow-lg flex justify-between items-center h-auto gap-4"
           >
-            <div class="px-[12px] py-[12px] bg-primaryColor rounded-[8px] shadow-2xl">
+            <div
+              class="px-[12px] py-[12px] bg-primaryColor rounded-[8px] shadow-2xl"
+            >
               <Phone class="w-6 h-6 stroke-white" />
             </div>
             <div>

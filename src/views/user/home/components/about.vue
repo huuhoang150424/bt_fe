@@ -1,5 +1,5 @@
 <script setup>
-import { Button } from '@/components/ui/button';
+  import { Button } from '@/components/ui/button';
 </script>
 
 <template>
@@ -65,7 +65,9 @@ import { Button } from '@/components/ui/button';
         </div>
         <div class="mt-[40px] w-full shadow-lg">
           <ul class="flex items-center">
-            <li class="w-[50%] text-center bg-primaryColor text-white py-[10px]">
+            <li
+              class="w-[50%] text-center bg-primaryColor text-white py-[10px]"
+            >
               <span class="text-[18px] font-[600]">Sự khác biệt</span>
             </li>
             <li class="w-[50%] text-center bg-[#141d38] text-white py-[10px]">

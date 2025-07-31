@@ -1,8 +1,7 @@
 .wrapper {
   @apply mx-auto w-full px-[120px];
 }
-<<<<<<< HEAD
-=======
+
 .animate-fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -18,4 +17,3 @@
     transform: translateY(0);
   }
 }
->>>>>>> 90bce0762bc6abc436905e6608bed34490f8e9b7

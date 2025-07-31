@@ -25,11 +25,11 @@ export const useAuthStore = defineStore('auth', {
     },
   },
   getters: {
-    authHeader: (state) => {
+    authHeader: state => {
       return state.token ? { Authorization: `Bearer ${state.token}` } : {};
     },
-    isLoggedIn: (state) => {
+    isLoggedIn: state => {
       return state.isAuthenticated && !!state.token;
-    }
+    },
   },
 });
