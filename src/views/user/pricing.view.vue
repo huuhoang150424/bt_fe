@@ -1,65 +1,3 @@
-<script setup>
-  import { ref } from 'vue';
-  import { Button } from '@/components/ui/button';
-
-  const pricingPlans = ref([
-    {
-      name: 'Gói Cơ Bản',
-      description: 'Cung cấp các tính năng cần thiết',
-      price: '3,990,00₫ / tháng',
-      features: [
-        'Chiến lược kỹ thuật số toàn diện',
-        'Phân tích dữ liệu và báo cáo tiếp thị',
-        'Xây dựng và quản lý nội dung sáng tạo',
-        'Quản lý tương tác khách hàng',
-        'Phân tích và nghiên cứu thị trường',
-      ],
-    },
-    {
-      name: 'Gói Tiên Tiến',
-      description: 'Cung cấp các tính năng nâng cao',
-      price: '5,990,00₫ / tháng',
-      features: [
-        'Chiến lược kỹ thuật số toàn diện',
-        'Phân tích dữ liệu và báo cáo tiếp thị',
-        'Xây dựng và quản lý nội dung sáng tạo',
-        'Quản lý tương tác khách hàng',
-        'Phân tích và nghiên cứu thị trường',
-      ],
-    },
-    {
-      name: 'Gói Doanh Nghiệp',
-      description: 'Cung cấp giải pháp toàn diện',
-      price: '7,990,00₫ / tháng',
-      features: [
-        'Chiến lược kỹ thuật số toàn diện',
-        'Phân tích dữ liệu và báo cáo tiếp thị',
-        'Xây dựng và quản lý nội dung sáng tạo',
-        'Quản lý tương tác khách hàng',
-        'Phân tích và nghiên cứu thị trường',
-      ],
-    },
-  ]);
-
-  const testimonials = ref([
-    {
-      text: 'Dịch vụ marketing của công ty này thực sự xuất sắc! Họ đã xây dựng một chiến lược marketing toàn diện và hiệu quả cho doanh nghiệp của tôi.',
-      author: 'Sâm Nguyễn',
-      role: 'Khách hàng',
-    },
-    {
-      text: 'Dịch vụ marketing của công ty này thực sự xuất sắc! Họ đã xây dựng một chiến lược marketing toàn diện và hiệu quả cho doanh nghiệp của tôi.',
-      author: 'An An',
-      role: 'Khách hàng',
-    },
-    {
-      text: 'Dịch vụ marketing của công ty này thực sự xuất sắc! Họ đã xây dựng một chiến lược marketing toàn diện và hiệu quả cho doanh nghiệp của tôi.',
-      author: 'Huy Võ',
-      role: 'Khách hàng',
-    },
-  ]);
-</script>
-
 <template>
   <Header />
   <div class="container mx-auto py-12 px-4">
@@ -67,7 +5,16 @@
       Bảng giá <span class="text-violet-700">Dịch vụ</span>
     </h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+    <!-- Trạng thái tải -->
+    <div v-if="isLoading" class="text-center text-gray-600 text-lg">
+      Đang tải dữ liệu...
+    </div>
+    <!-- Lỗi -->
+    <div v-else-if="error" class="text-center text-red-500 text-lg">
+      {{ error }}
+    </div>
+    <!-- Danh sách gói giá -->
+    <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
       <div
         v-for="(plan, index) in pricingPlans"
         :key="index"
@@ -84,7 +31,7 @@
         <p
           class="text-4xl font-bold text-violet-700 mb-6 group-hover:text-white"
         >
-          {{ plan.price }}
+          {{ formatPrice(plan.price, plan.currency, plan.period) }}
         </p>
         <ul class="text-gray-700 text-left mb-8 group-hover:text-white">
           <li
@@ -93,6 +40,7 @@
             class="mb-2 flex items-center"
           >
             <svg
+              v-if="feature.included"
               class="w-5 h-5 mr-2 text-green-500 group-hover:text-white"
               fill="none"
               stroke="currentColor"
@@ -106,7 +54,22 @@
                 d="M5 13l4 4L19 7"
               ></path>
             </svg>
-            {{ feature }}
+            <svg
+              v-else
+              class="w-5 h-5 mr-2 text-red-500 group-hover:text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+            {{ feature.name }}
           </li>
         </ul>
         <Button
@@ -150,7 +113,6 @@
         :key="index"
         class="bg-white rounded-lg shadow-lg p-8"
       >
-        <!-- 5 Sao -->
         <div class="flex mb-3 text-blue-500 text-lg">
           <span v-for="n in 5" :key="n" class="mr-1">★</span>
         </div>
@@ -163,6 +125,74 @@
   <Footer />
 </template>
 
-<style scoped>
-  /* Add any specific styles here if needed */
-</style>
+<script setup>
+import { ref, onMounted } from 'vue';
+import { Button } from '@/components/ui/button';
+import api from '@/services/api';
+
+const pricingPlans = ref([]);
+const isLoading = ref(false);
+const error = ref(null);
+
+const testimonials = ref([
+  {
+    text: 'Dịch vụ marketing của công ty này thực sự xuất sắc! Họ đã xây dựng một chiến lược marketing toàn diện và hiệu quả cho doanh nghiệp của tôi.',
+    author: 'Sâm Nguyễn',
+    role: 'Khách hàng',
+  },
+  {
+    text: 'Dịch vụ marketing của công ty này thực sự xuất sắc! Họ đã xây dựng một chiến lược marketing toàn diện và hiệu quả cho doanh nghiệp của tôi.',
+    author: 'An An',
+    role: 'Khách hàng',
+  },
+  {
+    text: 'Dịch vụ marketing của công ty này thực sự xuất sắc! Họ đã xây dựng một chiến lược marketing toàn diện và hiệu quả cho doanh nghiệp của tôi.',
+    author: 'Huy Võ',
+    role: 'Khách hàng',
+  },
+]);
+
+const fetchPricingPlans = async () => {
+  isLoading.value = true;
+  error.value = null;
+  try {
+    const response = await api.get('/pricings/get-all');
+    console.log(response)
+    if (response.statusCode === 200) {
+      pricingPlans.value = response.data || [];
+      if (pricingPlans.value.length === 0) {
+        error.value = 'Không tìm thấy gói giá nào';
+        toast({
+          title: 'Cảnh báo',
+          description: error.value,
+          variant: 'destructive',
+        });
+      }
+    } else {
+      throw new Error(response.message || 'Lỗi khi lấy danh sách gói giá');
+    }
+  } catch (err) {
+    error.value = err.message || 'Không thể tải danh sách gói giá';
+    toast({
+      title: 'Lỗi',
+      description: error.value,
+      variant: 'destructive',
+    });
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+const formatPrice = (price, currency, period) => {
+  const formatter = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: currency || 'VND',
+    minimumFractionDigits: 0,
+  });
+  return `${formatter.format(price)} / ${period === 'monthly' ? 'tháng' : 'năm'}`;
+};
+
+onMounted(() => {
+  fetchPricingPlans();
+});
+</script>
