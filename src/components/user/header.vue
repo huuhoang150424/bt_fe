@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Phần top bar -->
     <div class="wrapper bg-primaryColor py-[8px]">
       <ul class="text-white flex items-center gap-[15px]">
         <li class="flex items-center gap-2">
@@ -19,8 +20,10 @@
       </ul>
     </div>
 
+    <!-- Phần menu chính -->
     <div class="bg-[#e1eaff]">
       <div class="flex justify-between items-center wrapper py-[17px]">
+        <!-- Logo -->
         <router-link to="/">
           <img
             src="../../../public/logo.png"
@@ -29,27 +32,26 @@
           />
         </router-link>
 
-        <div>
-          <ul class="flex gap-8">
-            <li v-for="item in navItems" :key="item.name">
-              <router-link
-                :to="item.path"
-                class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out"
-              >
-                {{ item.name }}
-              </router-link>
-            </li>
-          </ul>
-        </div>
+        <!-- Menu -->
+        <ul class="flex gap-8">
+          <li v-for="item in navItems" :key="item.name">
+            <router-link
+              :to="item.path"
+              class="text-gray-900 font-[600] text-[18px] hover:text-primaryColor transition duration-300 ease-in-out"
+            >
+              {{ item.name }}
+            </router-link>
+          </li>
+        </ul>
 
-        <div
-          class="px-[14px] py-[14px] rounded-[100%] border-[2px] border-gray-200 bg-white"
-        >
-          <span>Tìm</span>
+        <!-- Tìm kiếm -->
+        <div class="relative w-[250px]">
+          <Search v-model="searchTerm" />
         </div>
       </div>
     </div>
 
+    <!-- Banner Header -->
     <div v-if="route.name !== 'home'" class="relative">
       <img
         src="../../../public/bg-header.jpg"
@@ -81,19 +83,22 @@
   </div>
 </template>
 
-<script setup>
-  import { useRoute } from 'vue-router';
-  import { Phone, Mail, MapPin } from 'lucide-vue-next';
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { Phone, Mail, MapPin } from 'lucide-vue-next';
+import Search from '@/components/user/search.vue';
 
-  const route = useRoute();
+const route = useRoute();
+const searchTerm = ref('');
 
-  const navItems = [
-    { name: 'Trang chủ', path: '/' },
-    { name: 'Giới thiệu', path: '/introduce' },
-    { name: 'Dịch vụ', path: '/service' },
-    { name: 'Faq', path: '/fqa' },
-    { name: 'Bảng giá', path: '/pricing' },
-    { name: 'Tin tức', path: '/news' },
-    { name: 'Liên hệ', path: '/contact' },
-  ];
+const navItems = [
+  { name: 'Trang chủ', path: '/' },
+  { name: 'Giới thiệu', path: '/introduce' },
+  { name: 'Dịch vụ', path: '/service' },
+  { name: 'Faq', path: '/fqa' },
+  { name: 'Bảng giá', path: '/pricing' },
+  { name: 'Tin tức', path: '/news' },
+  { name: 'Liên hệ', path: '/contact' },
+];
 </script>
