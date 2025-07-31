@@ -1,329 +1,211 @@
-<template>
-  <div class="container mx-auto p-4">
-    <!-- Tiêu đề -->
-    <h1 class="text-[20px] font-bold text-[hsl(var(--primary))] mb-4">
-      Quản lý kế hoạch định giá
-    </h1>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { useForm, useFieldArray } from 'vee-validate';
+import { pricingSchema } from './schema'
+import { ApiUrl } from '@/constant/api-url';
+import { useAuthStore } from '@/stores/auth';
 
-    <!-- Bảng kế hoạch định giá -->
-    <div class="border border-gray-200 rounded-md">
-      <Table>
-        <TableHeader>
-          <TableRow class="border-gray-200">
-            <TableHead
-              class="p-3 text-[15px] font-semibold text-[hsl(var(--secondary-foreground))]"
-            >
-              Tên kế hoạch
-            </TableHead>
-            <TableHead
-              class="p-3 text-[15px] font-semibold text-[hsl(var(--secondary-foreground))]"
-            >
-              Giá
-            </TableHead>
-            <TableHead
-              class="p-3 text-[15px] font-semibold text-[hsl(var(--secondary-foreground))]"
-            >
-              Chu kỳ
-            </TableHead>
-            <TableHead
-              class="p-3 text-[15px] font-semibold text-[hsl(var(--secondary-foreground))]"
-            >
-              Ngày tạo
-            </TableHead>
-            <TableHead
-              class="p-3 text-[15px] font-semibold text-[hsl(var(--secondary-foreground))]"
-            >
-              Hành động
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow
-            v-for="plan in pricingPlans"
-            :key="plan.id"
-            class="border-gray-200 hover:bg-[hsl(var(--muted))]"
-          >
-            <TableCell class="p-3 text-[15px] text-[hsl(var(--foreground))]">{{
-              plan.name
-            }}</TableCell>
-            <TableCell class="p-3 text-[15px] text-[hsl(var(--foreground))]"
-              >{{ plan.price }} {{ plan.currency }}</TableCell
-            >
-            <TableCell class="p-3 text-[15px] text-[hsl(var(--foreground))]">{{
-              plan.period
-            }}</TableCell>
-            <TableCell class="p-3 text-[15px] text-[hsl(var(--foreground))]">{{
-              plan.createdAt
-            }}</TableCell>
-            <TableCell class="p-3 flex gap-2">
-              <Button
-                class="text-[15px] px-3 py-1 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-opacity-90 transition-colors"
-                @click="openEditDialog(plan)"
-              >
-                Sửa
-              </Button>
-              <Button
-                variant="destructive"
-                class="text-[15px] px-3 py-1"
-                @click="openDeleteDialog(plan.id, plan.name)"
-              >
-                Xóa
-              </Button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </div>
+const authStore = useAuthStore();
 
-    <!-- Phân trang (đã comment) -->
-    <!-- <Pagination
-      :current-page="page"
-      :total-pages="totalPages"
-      @update:current-page="page = $event"
-      class="mt-4"
-    /> -->
+type Feature = { name: string; included?: boolean };
+type PricingForm = {
+  id: string | null;
+  name: string;
+  description: string;
+  price: number;
+  currency?: string;
+  period?: string;
+  features: Feature[];
+};
 
-    <!-- Dialog sửa kế hoạch -->
-    <Dialog v-model:open="isEditDialogOpen">
-      <DialogContent
-        class="sm:max-w-[425px] bg-[hsl(var(--background))] rounded-md"
-      >
-        <DialogHeader>
-          <DialogTitle class="text-[18px] font-bold text-[hsl(var(--primary))]"
-            >Sửa kế hoạch</DialogTitle
-          >
-        </DialogHeader>
-        <form @submit.prevent="handleEditPlan">
-          <div class="space-y-4 p-6">
-            <div>
-              <label
-                class="block text-[15px] text-[hsl(var(--foreground))] mb-2"
-                for="name"
-              >
-                Tên kế hoạch
-              </label>
-              <Input
-                id="name"
-                v-model="editPlan.name"
-                class="p-2 text-[15px] border-gray-200 focus:ring-[hsl(var(--primary))] transition-all"
-                required
-              />
-            </div>
-            <div>
-              <label
-                class="block text-[15px] text-[hsl(var(--foreground))] mb-2"
-                for="description"
-              >
-                Mô tả
-              </label>
-              <Textarea
-                id="description"
-                v-model="editPlan.description"
-                class="p-2 text-[15px] border-gray-200 focus:ring-[hsl(var(--primary))] transition-all"
-                required
-              />
-            </div>
-            <div>
-              <label
-                class="block text-[15px] text-[hsl(var(--foreground))] mb-2"
-                for="price"
-              >
-                Giá
-              </label>
-              <Input
-                id="price"
-                type="number"
-                v-model="editPlan.price"
-                class="p-2 text-[15px] border-gray-200 focus:ring-[hsl(var(--primary))] transition-all"
-                required
-              />
-            </div>
-            <div>
-              <label
-                class="block text-[15px] text-[hsl(var(--foreground))] mb-2"
-                for="currency"
-              >
-                Đơn vị tiền tệ
-              </label>
-              <Input
-                id="currency"
-                v-model="editPlan.currency"
-                class="p-2 text-[15px] border-gray-200 focus:ring-[hsl(var(--primary))] transition-all"
-                required
-              />
-            </div>
-            <div>
-              <label
-                class="block text-[15px] text-[hsl(var(--foreground))] mb-2"
-                for="period"
-              >
-                Chu kỳ
-              </label>
-              <Input
-                id="period"
-                v-model="editPlan.period"
-                class="p-2 text-[15px] border-gray-200 focus:ring-[hsl(var(--primary))] transition-all"
-                required
-              />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="secondary"
-              class="text-[15px]"
-              @click="isEditDialogOpen = false"
-            >
-              Hủy
-            </Button>
-            <Button
-              type="submit"
-              class="text-[15px] bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-opacity-90 transition-colors"
-            >
-              Lưu
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+// Fetch danh sách
+const pricings = ref<PricingForm[]>([]);
 
-    <!-- Dialog xóa kế hoạch -->
-    <Dialog v-model:open="isDeleteDialogOpen">
-      <DialogContent
-        class="sm:max-w-[425px] bg-[hsl(var(--background))] rounded-md"
-      >
-        <DialogHeader>
-          <DialogTitle class="text-[18px] font-bold text-[hsl(var(--primary))]"
-            >Xác nhận xóa</DialogTitle
-          >
-        </DialogHeader>
-        <div class="p-6">
-          <p class="text-[15px] text-[hsl(var(--foreground))]">
-            Bạn có chắc muốn xóa kế hoạch "<strong>{{ deletePlanName }}</strong
-            >" không?
-          </p>
-        </div>
-        <DialogFooter>
-          <Button
-            type="button"
-            variant="secondary"
-            class="text-[15px]"
-            @click="isDeleteDialogOpen = false"
-          >
-            Hủy
-          </Button>
-          <Button
-            variant="destructive"
-            class="text-[15px]"
-            @click="handleDeletePlan"
-          >
-            Xóa
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  </div>
-</template>
-
-<script setup>
-  import { ref } from 'vue';
-  import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from '@/components/ui/table';
-  import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogFooter,
-  } from '@/components/ui/dialog';
-  import { Button } from '@/components/ui/button';
-  import { Input } from '@/components/ui/input';
-  import { Textarea } from '@/components/ui/textarea';
-
-  // Dữ liệu mẫu
-  const pricingPlans = ref([
-    {
-      id: '1',
-      name: 'Cơ bản',
-      description: 'Gói cơ bản cho người mới',
-      price: 100000,
-      currency: 'VND',
-      period: 'month',
-      createdAt: '01/01/2025 10:00',
+const fetchPricings = async () => {
+  const res = await fetch(`${ApiUrl}/pricings/get-all`, {
+    headers: {
+      'Content-Type': 'application/json',
+       Authorization: authStore.authHeader?.Authorization ?? '',
     },
-    {
-      id: '2',
-      name: 'Nâng cao',
-      description: 'Gói nâng cao cho doanh nghiệp',
-      price: 200000,
-      currency: 'VND',
-      period: 'month',
-      createdAt: '03/01/2025 14:00',
-    },
-    {
-      id: '3',
-      name: 'Pro',
-      description: 'Gói chuyên nghiệp với đầy đủ tính năng',
-      price: 500000,
-      currency: 'VND',
-      period: 'month',
-      createdAt: '05/01/2025 09:00',
-    },
-  ]);
+  });
+  const data = await res.json();
+  pricings.value = data.data || [];
+};
 
-  const page = ref(1);
-  const totalPages = ref(5);
-  const isEditDialogOpen = ref(false);
-  const isDeleteDialogOpen = ref(false);
-  const editPlan = ref({
-    id: '',
+// Form + Validation
+const {
+  handleSubmit,
+  resetForm,
+  values,
+  errors,
+  setValues,
+} = useForm<PricingForm>({
+  validationSchema: pricingSchema,
+  initialValues: {
+    id: null,
     name: '',
     description: '',
     price: 0,
-    currency: 'VND',
-    period: 'month',
+    currency: '',
+    period: '',
+    features: [{ name: '', included: false }],
+  },
+});
+
+const { fields: featureFields, push, remove } = useFieldArray<Feature>('features');
+
+const submitPricing = handleSubmit(async formData => {
+  try {
+    const method = formData.id ? 'PATCH' : 'POST';
+    const url = formData.id
+      ? `${ApiUrl}/pricings/update/${formData.id}`
+      : `${ApiUrl}/pricings/create`;
+
+    const res = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+         Authorization: authStore.authHeader?.Authorization ?? '',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!res.ok) throw new Error('Lỗi khi xử lý');
+    await fetchPricings();
+    resetForm();
+  } catch (err) {
+    console.error(err);
+    alert('Lỗi xử lý dữ liệu');
+  }
+});
+
+const editPricing = (p: PricingForm) => {
+  setValues({ ...p });
+};
+
+const deletePricing = async (id: string) => {
+  if (!confirm('Xoá gói này?')) return;
+  await fetch(`${ApiUrl}/pricings/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+       Authorization: authStore.authHeader?.Authorization ?? '',
+    },
   });
-  const deletePlanId = ref(null);
-  const deletePlanName = ref('');
+  await fetchPricings();
+};
 
-  // Mở dialog sửa
-  const openEditDialog = plan => {
-    editPlan.value = { ...plan };
-    isEditDialogOpen.value = true;
-  };
-
-  // Xử lý sửa kế hoạch (giả lập)
-  const handleEditPlan = () => {
-    console.log('Sửa kế hoạch:', editPlan.value);
-    editPlan.value = {
-      id: '',
-      name: '',
-      description: '',
-      price: 0,
-      currency: 'VND',
-      period: 'month',
-    };
-    isEditDialogOpen.value = false;
-  };
-
-  // Mở dialog xóa
-  const openDeleteDialog = (id, name) => {
-    deletePlanId.value = id;
-    deletePlanName.value = name;
-    isDeleteDialogOpen.value = true;
-  };
-
-  // Xử lý xóa kế hoạch (giả lập)
-  const handleDeletePlan = () => {
-    console.log('Xóa kế hoạch:', deletePlanId.value);
-    isDeleteDialogOpen.value = false;
-    deletePlanId.value = null;
-    deletePlanName.value = '';
-  };
+onMounted(fetchPricings);
 </script>
+
+<template>
+  <div class="p-6 space-y-6">
+    <h1 class="text-2xl font-bold">Quản lý Gói Giá</h1>
+
+    <!-- FORM -->
+    <form @submit.prevent="submitPricing" class="grid md:grid-cols-2 gap-4 items-start">
+      <div>
+        <label class="text-sm font-medium">Tên gói *</label>
+        <input v-model="values.name" class="border px-3 py-2 rounded w-full" />
+        <p class="text-red-500 text-sm">{{ errors.name }}</p>
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Giá *</label>
+        <input
+          v-model="values.price"
+          type="number"
+          class="border px-3 py-2 rounded w-full"
+        />
+        <p class="text-red-500 text-sm">{{ errors.price }}</p>
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="text-sm font-medium">Mô tả *</label>
+        <textarea
+          v-model="values.description"
+          class="border px-3 py-2 rounded w-full"
+        />
+        <p class="text-red-500 text-sm">{{ errors.description }}</p>
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Tiền tệ</label>
+        <input v-model="values.currency" class="border px-3 py-2 rounded w-full" />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Thời gian sử dụng</label>
+        <input v-model="values.period" class="border px-3 py-2 rounded w-full" />
+      </div>
+
+      <!-- FEATURES -->
+      <div class="md:col-span-2 space-y-2">
+        <label class="text-sm font-medium">Tính năng *</label>
+        <div
+          v-for="(f, i) in featureFields"
+          :key="f.key"
+          class="flex items-center gap-2 border p-2 rounded"
+        >
+          <input
+            v-model="values.features[i].name"
+            class="flex-1 border px-2 py-1 rounded"
+            placeholder="Tên tính năng"
+          />
+          <label class="flex items-center gap-1">
+            <input type="checkbox" v-model="values.features[i].included" />
+            Có sẵn
+          </label>
+          <button type="button" @click="remove(i)" class="text-red-600">X</button>
+        </div>
+        <button type="button" class="text-blue-600" @click="push({ name: '', included: false })">
+          + Thêm tính năng
+        </button>
+        <p class="text-red-500 text-sm">{{ errors.features }}</p>
+      </div>
+
+      <!-- BUTTON -->
+      <div class="md:col-span-2 flex gap-4 mt-4">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+          {{ values.id ? 'Cập nhật' : 'Thêm mới' }}
+        </button>
+        <button
+          type="button"
+          v-if="values.id"
+          @click="resetForm()"
+          class="px-4 py-2 border rounded"
+        >
+          Huỷ
+        </button>
+      </div>
+    </form>
+
+    <!-- TABLE -->
+    <table class="w-full border mt-6">
+      <thead>
+        <tr class="bg-gray-100 text-left">
+          <th class="px-4 py-2 border">#</th>
+          <th class="px-4 py-2 border">Tên</th>
+          <th class="px-4 py-2 border">Giá</th>
+          <th class="px-4 py-2 border">Thời hạn</th>
+          <th class="px-4 py-2 border">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(p, i) in pricings" :key="p.id ?? i">
+          <td class="px-4 py-2 border">{{ i + 1 }}</td>
+          <td class="px-4 py-2 border">{{ p.name }}</td>
+          <td class="px-4 py-2 border">{{ p.price.toLocaleString() }} {{ p.currency || 'VND' }}</td>
+          <td class="px-4 py-2 border">{{ p.period || '-' }}</td>
+          <td class="px-4 py-2 border space-x-2">
+            <button @click="editPricing(p)" class="text-blue-600">Sửa</button>
+            <button v-if="p.id" @click="deletePricing(p.id)" class="text-red-600">Xoá</button>
+          </td>
+        </tr>
+        <tr v-if="pricings.length === 0">
+          <td colspan="5" class="text-center py-4">Chưa có gói giá nào</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>

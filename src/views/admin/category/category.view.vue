@@ -1,246 +1,157 @@
 <template>
-  <div class="container mx-auto p-4">
-    <!-- Tiêu đề -->
-    <h1 class="text-[20px] font-bold text-[hsl(var(--primary))] mb-4">
-      Quản lý danh mục
-    </h1>
+  <div class="p-6 space-y-6">
+    <h1 class="text-2xl font-bold">Quản lý danh mục</h1>
 
-    <!-- Bảng danh mục -->
-    <div class="border border-gray-200 rounded-md">
-      <Table>
-        <TableHeader>
-          <TableRow class="border-gray-200">
-            <TableHead
-              class="p-3 text-[15px] font-semibold text-[hsl(var(--secondary-foreground))]"
-            >
-              Tên danh mục
-            </TableHead>
-            <TableHead
-              class="p-3 text-[15px] font-semibold text-[hsl(var(--secondary-foreground))]"
-            >
-              Ngày tạo
-            </TableHead>
-            <TableHead
-              class="p-3 text-[15px] font-semibold text-[hsl(var(--secondary-foreground))]"
-            >
-              Ngày cập nhật
-            </TableHead>
-            <TableHead
-              class="p-3 text-[15px] font-semibold text-[hsl(var(--secondary-foreground))]"
-            >
-              Hành động
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow
-            v-for="category in categories"
-            :key="category.id"
-            class="border-gray-200 hover:bg-[hsl(var(--muted))]"
-          >
-            <TableCell class="p-3 text-[15px] text-[hsl(var(--foreground))]">{{
-              category.name
-            }}</TableCell>
-            <TableCell class="p-3 text-[15px] text-[hsl(var(--foreground))]">{{
-              category.createdAt
-            }}</TableCell>
-            <TableCell class="p-3 text-[15px] text-[hsl(var(--foreground))]">{{
-              category.updatedAt
-            }}</TableCell>
-            <TableCell class="p-3 flex gap-2">
-              <Button
-                class="text-[15px] px-3 py-1 bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-opacity-90 transition-colors"
-                @click="openEditDialog(category)"
-              >
-                Sửa
-              </Button>
-              <Button
-                variant="destructive"
-                class="text-[15px] px-3 py-1"
-                @click="openDeleteDialog(category.id, category.name)"
-              >
-                Xóa
-              </Button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </div>
-
-    <!-- Phân trang (đã comment) -->
-    <!-- <Paginate
-      :current-page="page"
-      :total-pages="totalPages"
-      @update:current-page="page = $event"
-      class="mt-4"
-    /> -->
-
-    <!-- Dialog sửa danh mục -->
-    <Dialog v-model:open="isEditDialogOpen">
-      <DialogContent
-        class="sm:max-w-[425px] bg-[hsl(var(--background))] rounded-md"
+    <!-- Form tạo / chỉnh sửa -->
+    <form @submit.prevent="submitCategory" class="flex gap-4 items-end">
+      <div>
+        <label class="block mb-1 text-sm font-medium">Tên danh mục</label>
+        <input
+          v-model="name"
+          type="text"
+          class="border px-3 py-2 rounded w-64"
+          placeholder="Nhập tên danh mục"
+        />
+        <span v-if="nameError" class="text-red-500 text-sm mt-1 block">
+          {{ nameError }}
+        </span>
+      </div>
+      <button
+        type="submit"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
       >
-        <DialogHeader>
-          <DialogTitle class="text-[18px] font-bold text-[hsl(var(--primary))]"
-            >Sửa danh mục</DialogTitle
-          >
-        </DialogHeader>
-        <form @submit.prevent="handleEditCategory">
-          <div class="space-y-4 p-6">
-            <div>
-              <label
-                class="block text-[15px] text-[hsl(var(--foreground))] mb-2"
-                for="name"
-              >
-                Tên danh mục
-              </label>
-              <Input
-                id="name"
-                v-model="editCategory.name"
-                class="p-2 text-[15px] border-gray-200 focus:ring-[hsl(var(--primary))] transition-all"
-                required
-              />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="secondary"
-              class="text-[15px]"
-              @click="isEditDialogOpen = false"
-            >
-              Hủy
-            </Button>
-            <Button
-              type="submit"
-              class="text-[15px] bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-opacity-90 transition-colors"
-            >
-              Lưu
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
-
-    <!-- Dialog xóa danh mục -->
-    <Dialog v-model:open="isDeleteDialogOpen">
-      <DialogContent
-        class="sm:max-w-[425px] bg-[hsl(var(--background))] rounded-md"
+        {{ editingId ? 'Cập nhật' : 'Thêm mới' }}
+      </button>
+      <button
+        type="button"
+        v-if="editingId"
+        @click="clearForm"
+        class="px-4 py-2 border rounded"
       >
-        <DialogHeader>
-          <DialogTitle class="text-[18px] font-bold text-[hsl(var(--primary))]"
-            >Xác nhận xóa</DialogTitle
-          >
-        </DialogHeader>
-        <div class="p-6">
-          <p class="text-[15px] text-[hsl(var(--foreground))]">
-            Bạn có chắc muốn xóa danh mục "<strong>{{
-              deleteCategoryName
-            }}</strong
-            >" không?
-          </p>
-        </div>
-        <DialogFooter>
-          <Button
-            type="button"
-            variant="secondary"
-            class="text-[15px]"
-            @click="isDeleteDialogOpen = false"
-          >
-            Hủy
-          </Button>
-          <Button
-            variant="destructive"
-            class="text-[15px]"
-            @click="handleDeleteCategory"
-          >
-            Xóa
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        Huỷ
+      </button>
+    </form>
+
+    <!-- Danh sách danh mục -->
+    <table class="w-full border mt-6">
+      <thead>
+        <tr class="bg-gray-100 text-left">
+          <th class="px-4 py-2 border">#</th>
+          <th class="px-4 py-2 border">Tên danh mục</th>
+          <th class="px-4 py-2 border">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(cat, index) in categories" :key="cat.id">
+          <td class="px-4 py-2 border">{{ index + 1 }}</td>
+          <td class="px-4 py-2 border">{{ cat.name }}</td>
+          <td class="px-4 py-2 border space-x-2">
+            <button @click="editCategory(cat)" class="text-blue-600">Sửa</button>
+            <button @click="deleteCategory(cat.id)" class="text-red-600">Xoá</button>
+          </td>
+        </tr>
+        <tr v-if="categories.length === 0">
+          <td colspan="3" class="text-center py-4">Không có danh mục nào</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
-<script setup>
-  import { ref } from 'vue';
-  import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from '@/components/ui/table';
-  import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogFooter,
-  } from '@/components/ui/dialog';
-  import { Button } from '@/components/ui/button';
-  import { Input } from '@/components/ui/input';
-  import Paginate from '@/components/admin/paginate.vue';
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { useForm, useField } from 'vee-validate'
+import { categorySchema } from './schema'
+import { ApiUrl } from '@/constant/api-url'
+import { useAuthStore } from '@/stores/auth'
 
-  // Dữ liệu mẫu
-  const categories = ref([
-    {
-      id: '1',
-      name: 'Danh mục 1',
-      createdAt: '01/01/2025 10:00',
-      updatedAt: '02/01/2025 12:00',
-    },
-    {
-      id: '2',
-      name: 'Danh mục 2',
-      createdAt: '03/01/2025 14:00',
-      updatedAt: '04/01/2025 16:00',
-    },
-    {
-      id: '3',
-      name: 'Danh mục 3',
-      createdAt: '05/01/2025 09:00',
-      updatedAt: '06/01/2025 11:00',
-    },
-  ]);
+const authStore = useAuthStore()
 
-  const page = ref(1);
-  const totalPages = ref(5);
-  const isEditDialogOpen = ref(false);
-  const isDeleteDialogOpen = ref(false);
-  const editCategory = ref({
-    id: '',
-    name: '',
-  });
-  const deleteCategoryId = ref(null);
-  const deleteCategoryName = ref('');
+// Danh sách danh mục
+const categories = ref<Array<{ id: string; name: string }>>([])
 
-  // Mở dialog sửa
-  const openEditDialog = category => {
-    editCategory.value = { ...category };
-    isEditDialogOpen.value = true;
-  };
+// Sử dụng vee-validate với yup schema
+const { handleSubmit, resetForm, setValues } = useForm({
+  validationSchema: categorySchema,
+  initialValues: { name: '' },
+})
+const { value: name, errorMessage: nameError } = useField<string>('name')
 
-  // Xử lý sửa danh mục (giả lập)
-  const handleEditCategory = () => {
-    console.log('Sửa danh mục:', editCategory.value);
-    editCategory.value = { id: '', name: '' };
-    isEditDialogOpen.value = false;
-  };
+// Trạng thái đang chỉnh sửa
+const editingId = ref<string | null>(null)
 
-  // Mở dialog xóa
-  const openDeleteDialog = (id, name) => {
-    deleteCategoryId.value = id;
-    deleteCategoryName.value = name;
-    isDeleteDialogOpen.value = true;
-  };
+// Lấy danh sách danh mục
+const fetchCategories = async () => {
+  try {
+    const res = await fetch(`${ApiUrl}/categories`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const data = await res.json()
+    categories.value = data.data || []
+  } catch (err) {
+    console.error('Lỗi khi tải danh mục:', err)
+  }
+}
 
-  // Xử lý xóa danh mục (giả lập)
-  const handleDeleteCategory = () => {
-    console.log('Xóa danh mục:', deleteCategoryId.value);
-    isDeleteDialogOpen.value = false;
-    deleteCategoryId.value = null;
-    deleteCategoryName.value = '';
-  };
+// Gửi form (tạo hoặc cập nhật)
+const submitCategory = handleSubmit(async values => {
+  try {
+    const method = editingId.value ? 'PATCH' : 'POST'
+
+    const url = editingId.value
+      ? `${ApiUrl}/categories/${editingId.value}`
+      : `${ApiUrl}/categories`
+
+    const res = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: authStore.authHeader?.Authorization ?? '',
+      },
+      body: JSON.stringify(values),
+    })
+
+    if (!res.ok) throw new Error(`Lỗi ${res.status}`)
+    await fetchCategories()
+    clearForm()
+  } catch (err) {
+    alert('Lỗi khi xử lý dữ liệu')
+    console.error(err)
+  }
+})
+
+// Sửa danh mục
+const editCategory = (cat: { id: string; name: string }) => {
+  setValues({ name: cat.name })
+  editingId.value = cat.id
+}
+
+// Xoá danh mục
+const deleteCategory = async (id: string) => {
+  if (!confirm('Bạn có chắc chắn muốn xoá?')) return
+  try {
+    const res = await fetch(`${ApiUrl}/categories/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: authStore.authHeader?.Authorization ?? '',
+      },
+    })
+    if (!res.ok) throw new Error(`Lỗi ${res.status}`)
+    await fetchCategories()
+  } catch (err) {
+    alert('Lỗi khi xoá danh mục')
+    console.error(err)
+  }
+}
+
+// Reset form
+const clearForm = () => {
+  resetForm()
+  editingId.value = null
+}
+
+onMounted(fetchCategories)
 </script>
