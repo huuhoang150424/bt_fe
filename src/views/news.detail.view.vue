@@ -226,8 +226,6 @@
       }
     }
 
-    // Lấy ID từ URL
-  <<<<<<< HEAD
     const route = useRoute();
     const postId = route.params.id;
 
@@ -236,15 +234,9 @@
 
     const comments = computed(() => post.value?.commentList || []);
 
-  =======
+
 
     import { onMounted } from 'vue';
-    const route = useRoute();
-    const postId = route.params.id;
-
-    const post = ref(null);
-    const comments = ref([]);
-
     onMounted(async () => {
       try {
         const res = await fetch(`http://localhost:3000/post/${postId}`);
@@ -257,7 +249,6 @@
       }
     });
 
-  >>>>>>> fd71856 (call api news and news.detail)
     // Async sidebar
     const Sidebar = defineAsyncComponent({
       loader: () => import('./sidebar/sidebar.view.vue'),
