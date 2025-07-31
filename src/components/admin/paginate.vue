@@ -1,4 +1,3 @@
-```vue
 <template>
   <div class="flex items-center justify-between">
     <Button
@@ -68,4 +67,4 @@
     return range;
   });
 </script>
-```
+

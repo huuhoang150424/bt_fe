@@ -21,7 +21,6 @@
   import { RouterView } from 'vue-router';
   import NavBar from '@/components/admin/nav-bar.vue';
   import Header from '@/components/admin/header.vue';
-
   const isSidebarOpen = ref(true);
   const toggleSidebar = () => {
     isSidebarOpen.value = !isSidebarOpen.value;
