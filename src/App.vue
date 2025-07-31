@@ -1,7 +1,9 @@
 <script setup lang="ts">
-  import MainLayout from './components/layout/main-layout.vue';
+  import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <MainLayout />
+  <div class="min-h-screen">
+    <RouterView />
+  </div>
 </template>
