@@ -31,7 +31,11 @@ const api = {
     return api.fetchWithAuth(url, {
       ...options,
       method: 'POST',
-      body: data,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(options.headers || {})
+      },
+      body: JSON.stringify(data),
     });
   },
 
