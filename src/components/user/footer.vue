@@ -5,12 +5,45 @@ import { ref } from 'vue';
 
 const email = ref('');
 
+const services = [
+  'Tư vấn thiết kế',
+  'Thi công nội thất',
+  'Bảo trì & sửa chữa',
+  'Dịch vụ khách hàng'
+];
+
+const links = [
+  'Trang chủ',
+  'Giới thiệu',
+  'Dịch vụ',
+  'Dự án',
+  'Liên hệ'
+];
+
 const subscribe = () => {
   if (email.value) {
     console.log(`Subscribed with email: ${email.value}`);
     email.value = '';
   }
 };
+
+const posts = [
+  {
+    title: 'Thiết kế nội thất hiện đại 2024',
+    date: '01/06/2024',
+    image: '/post1.jpg'
+  },
+  {
+    title: 'Xu hướng màu sắc phòng khách',
+    date: '25/05/2024',
+    image: '/post2.jpg'
+  },
+  {
+    title: 'Tối ưu không gian nhỏ',
+    date: '15/05/2024',
+    image: '/post3.jpg'
+  }
+];
 </script>
 
 <template>
