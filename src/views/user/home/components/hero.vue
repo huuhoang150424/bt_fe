@@ -46,7 +46,7 @@
     </div>
     <div class="w-[50%]">
       <img
-        src="../../../../../public/banner.png"
+        src="/banner.png"
         alt="Man in suit pointing"
         class="w-full h-[600px] object-cover"
       />

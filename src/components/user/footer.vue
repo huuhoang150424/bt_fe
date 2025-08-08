@@ -58,7 +58,7 @@ const posts = [
         >
           <div class="flex items-center gap-4">
             <img
-              src="../../../public/bg-footer.png"
+              src="/bg-footer.png"
               alt="Logo"
               class="object-cover w-auto h-10 sm:h-12"
             />

@@ -57,7 +57,7 @@
       <span class="text-center">Năm kinh nghiệm</span>
     </div>
     <div class="w-[40%]">
-      <img src="../../public/about_3_1.png" class="h" alt="" />
+      <img src="/about_3_1.png" class="h" alt="" />
     </div>
     <div class="w-[45%] self-start">
       <div class="relative">
@@ -275,7 +275,7 @@
         <!-- Right Image Column -->
         <div class="relative flex justify-center lg:justify-end">
           <img
-            src="../../public/about_3_1.png"
+            src="/about_3_1.png"
             alt="Hình ảnh minh họa về tiếp thị hiện đại"
             class="w-full max-w-lg lg:max-w-none h-auto object-contain"
           />

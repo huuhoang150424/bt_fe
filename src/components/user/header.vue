@@ -26,7 +26,7 @@
         <!-- Logo -->
         <router-link to="/">
           <img
-            src="../../../public/logo.png"
+            src="/logo.png"
             alt="Logo"
             class="object-cover w-auto h-10 sm:h-12"
           />
@@ -92,7 +92,7 @@
     <!-- Banner Header -->
     <div v-if="route.name !== 'home'" class="relative">
       <img
-        src="../../../public/bg-header.jpg"
+        src="/bg-header.jpg"
         alt="Header Background"
         class="w-full object-cover h-48 sm:h-64"
       />

@@ -3,7 +3,7 @@
     <!-- Bài viết chính -->
     <div class="lg:col-span-2 space-y-6 md:space-y-10">
       <div
-        v-for="(post, index) in posts"
+        v-for="(post) in posts"
         :key="post.id"
         class="bg-white rounded-xl shadow-md overflow-hidden"
       >

@@ -5,7 +5,7 @@
 <template>
   <section class="w-full wrapper flex justify-between py-16">
     <div class="relative w-[44%]">
-      <img src="../../../../../public/about_3_1.png" alt="" />
+      <img src="/about_3_1.png" alt="" />
       <div
         class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-[20px] py-[20px] bg-white rounded-[50%] cursor-pointer hover:bg-primaryColor transition-all duration-300"
       >
