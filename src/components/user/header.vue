@@ -12,9 +12,17 @@
           <Phone class="w-4 h-4 text-white" />
           <span class="font-semibold">(+84) 0313-728-397</span>
         </li>
-        <li class="flex items-center gap-2">
+        <li class="flex items-center gap-2 mb-2 sm:mb-0">
           <Mail class="w-4 h-4 text-white" />
           <span class="font-semibold">info@themona.global</span>
+        </li>
+        <li class="flex items-center justify-center sm:justify-start gap-2">
+          <router-link
+            to="/login"
+            class="text-white font-semibold text-sm px-4 py-1.5 rounded-md bg-white bg-opacity-20 hover:bg-opacity-30 transition duration-300 ease-in-out"
+          >
+            Đăng nhập
+          </router-link>
         </li>
       </ul>
     </div>
@@ -26,7 +34,7 @@
           <img
             src="/logo.png"
             alt="Logo"
-            class="object-cover w-auto h-10 sm:h-12 "
+            class="object-cover w-auto h-10 sm:h-12"
           />
         </router-link>
 
@@ -103,6 +111,15 @@
                   @click="closeMenu"
                 >
                   {{ item.name }}
+                </router-link>
+              </li>
+              <li>
+                <router-link
+                  to="/login"
+                  class="block text-gray-900 font-semibold text-lg py-2 px-4 rounded-lg hover:bg-white hover:text-primaryColor transition duration-300 ease-in-out"
+                  @click="closeMenu"
+                >
+                  Đăng nhập
                 </router-link>
               </li>
             </ul>
