@@ -1,20 +1,21 @@
 <script setup>
-  import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 </script>
 
 <template>
-  <section class="w-full wrapper flex justify-between py-16">
-    <div class="relative w-[44%]">
-      <img src="/about_3_1.png" alt="" />
+  <section class="w-full wrapper flex flex-col md:flex-row justify-between py-8 md:py-16">
+    <!-- Image Section -->
+    <div class="relative w-full md:w-[44%] mb-8 md:mb-0">
+      <img src="/about_3_1.png" alt="About Us" class="w-full h-auto object-cover" />
       <div
-        class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-[20px] py-[20px] bg-white rounded-[50%] cursor-pointer hover:bg-primaryColor transition-all duration-300"
+        class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-4 md:p-5 bg-white rounded-full cursor-pointer hover:bg-primaryColor transition-all duration-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
           viewBox="0 0 24 24"
           stroke-width="1.5"
-          class="size-6 text-primaryColor group-hover:text-white transition-all duration-300"
+          class="w-6 h-6 md:w-8 md:h-8 text-primaryColor group-hover:text-white transition-all duration-300"
         >
           <path
             stroke-linecap="round"
@@ -24,11 +25,13 @@
         </svg>
       </div>
     </div>
-    <div class="w-[50%]">
+    <!-- Content Section -->
+    <div class="w-full md:w-[50%]">
       <div>
+        <!-- Title Section -->
         <div class="relative">
           <h1
-            class="text-[68px] font-[900]"
+            class="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-[900]"
             style="
               background: linear-gradient(
                 to bottom,
@@ -46,40 +49,45 @@
           <div class="flex items-center gap-2 absolute top-[55%] left-2">
             <img
               src="https://future-tech.monamedia.net/wp-content/uploads/2024/02/title_shape_2.svg"
-              alt=""
+              alt="Title Shape"
+              class="w-6 h-6 md:w-8 md:h-8"
             />
-            <h3 class="text-[20px] font-[600] text-primaryColor">
+            <h3 class="text-base md:text-xl font-[600] text-primaryColor">
               giới thiệu giải pháp
             </h3>
           </div>
         </div>
+        <!-- Description Section -->
         <div>
-          <h1 class="text-[40px] text-gray-800 font-[700] mb-[20px]">
-            Phát triển bằng các chiến <br />
+          <h1 class="text-2xl sm:text-3xl md:text-4xl text-gray-800 font-[700] mb-4 md:mb-5">
+            Phát triển bằng các chiến <br class="hidden md:block" />
             lược <span class="text-primaryColor">Marketing</span>
           </h1>
-          <span class="text-gray-500 font-[400] my-[20px]"
-            >Với sự kết hợp giữa sự sáng tạo, chuyên môn và dữ liệu, chúng tôi
-            tạo ra những chiến lược Marketing độc đáo và hiệu quả.</span
-          >
+          <span class="text-gray-500 text-sm md:text-base font-[400] block my-4 md:my-5">
+            Với sự kết hợp giữa sự sáng tạo, chuyên môn và dữ liệu, chúng tôi
+            tạo ra những chiến lược Marketing độc đáo và hiệu quả.
+          </span>
         </div>
-        <div class="mt-[40px] w-full shadow-lg">
+        <!-- Tabs Section -->
+        <div class="mt-8 md:mt-10 w-full shadow-lg">
           <ul class="flex items-center">
             <li
-              class="w-[50%] text-center bg-primaryColor text-white py-[10px]"
+              class="w-1/2 text-center bg-primaryColor text-white py-2 md:py-3 text-sm md:text-lg font-[600]"
             >
-              <span class="text-[18px] font-[600]">Sự khác biệt</span>
+              Sự khác biệt
             </li>
-            <li class="w-[50%] text-center bg-[#141d38] text-white py-[10px]">
-              <span class="text-[18px] font-[600]">Giá trị mang đến</span>
+            <li
+              class="w-1/2 text-center bg-[#141d38] text-white py-2 md:py-3 text-sm md:text-lg font-[600]"
+            >
+              Giá trị mang đến
             </li>
           </ul>
-          <div class="p-[25px]">
-            <h1 class="text-gray-800 font-[600] text-[22px]">
+          <div class="p-4 md:p-6">
+            <h1 class="text-gray-800 font-[600] text-lg md:text-xl lg:text-[22px]">
               Chúng tôi lắng nghe và hiểu rõ mục tiêu kinh doanh của bạn để xây
               dựng chiến lược
             </h1>
-            <p class="text-gray-500 text-[15px] mt-[15px] font-[400]">
+            <p class="text-gray-500 text-xs md:text-sm lg:text-[15px] mt-3 md:mt-4 font-[400]">
               Đội ngũ chuyên gia của chúng tôi sở hữu kiến thức sâu rộng và kinh
               nghiệm thực tế trong lĩnh vực Marketing. Chúng tôi luôn cập nhật
               với những xu hướng mới nhất và công nghệ tiên tiến nhất, giúp bạn
@@ -88,7 +96,7 @@
             </p>
             <Button
               variant="outline"
-              class="border-none bg-primaryColor text-white mt-[25px]"
+              class="border-none bg-primaryColor text-white mt-4 md:mt-6 text-sm md:text-base"
             >
               Tìm hiểu thêm
             </Button>
@@ -98,3 +106,4 @@
     </div>
   </section>
 </template>
+

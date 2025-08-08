@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Phần top bar -->
     <div class="wrapper bg-primaryColor py-2">
       <ul class="text-white flex flex-col sm:flex-row sm:items-center sm:gap-4 text-sm">
         <li class="flex items-center gap-2 mb-2 sm:mb-0">
@@ -20,76 +19,104 @@
       </ul>
     </div>
 
-    <!-- Phần menu chính -->
-    <div class="bg-[#e1eaff]">
-      <div class="flex justify-between items-center wrapper py-4">
+    <div class="bg-[#e1eaff] relative">
+      <div class="wrapper flex justify-between items-center py-4">
         <!-- Logo -->
-        <router-link to="/">
+        <router-link to="/" class="z-[1] relative">
           <img
             src="/logo.png"
             alt="Logo"
-            class="object-cover w-auto h-10 sm:h-12"
+            class="object-cover w-auto h-10 sm:h-12 "
           />
         </router-link>
 
-        <!-- Menu toggle for mobile -->
         <button
-          class="sm:hidden text-gray-900 focus:outline-none"
+          class="sm:hidden text-gray-900 focus:outline-none z-30 relative p-2"
           @click="toggleMenu"
           aria-label="Toggle menu"
         >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              v-if="!isMenuOpen"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            ></path>
-            <path
-              v-else
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
+          <div class="w-6 h-6 relative">
+            <span
+              :class="[
+                'absolute left-0 w-6 h-0.5 bg-gray-900 transform transition-all duration-300 ease-in-out',
+                isMenuOpen ? 'top-3 rotate-45' : 'top-1'
+              ]"
+            ></span>
+            <span
+              :class="[
+                'absolute left-0 top-3 w-6 h-0.5 bg-gray-900 transform transition-all duration-300 ease-in-out',
+                isMenuOpen ? 'opacity-0' : 'opacity-100'
+              ]"
+            ></span>
+            <span
+              :class="[
+                'absolute left-0 w-6 h-0.5 bg-gray-900 transform transition-all duration-300 ease-in-out',
+                isMenuOpen ? 'top-3 -rotate-45' : 'top-5'
+              ]"
+            ></span>
+          </div>
         </button>
 
-        <!-- Menu -->
-        <div
-          :class="[
-            'sm:flex sm:items-center sm:gap-8 absolute sm:static top-full left-0 w-full sm:w-auto bg-[#e1eaff] sm:bg-transparent transition-all duration-300 ease-in-out',
-            isMenuOpen ? 'block' : 'hidden'
-          ]"
-        >
-          <ul class="flex flex-col sm:flex-row gap-4 sm:gap-8 p-4 sm:p-0">
+        <div class="hidden sm:flex sm:items-center sm:gap-8">
+          <ul class="flex flex-row gap-8">
             <li v-for="item in navItems" :key="item.name">
               <router-link
                 :to="item.path"
-                class="text-gray-900 font-semibold text-base sm:text-lg hover:text-primaryColor transition duration-300 ease-in-out"
-                @click="closeMenu"
+                class="text-gray-900 font-semibold text-lg hover:text-primaryColor transition duration-300 ease-in-out relative group"
               >
                 {{ item.name }}
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primaryColor transition-all duration-300 group-hover:w-full"></span>
               </router-link>
             </li>
           </ul>
 
-          <!-- Tìm kiếm -->
-          <div class="mt-4 sm:mt-0 sm:ml-8 w-full sm:w-64">
+          <div class="w-64">
             <Search v-model="searchTerm" />
+          </div>
+        </div>
+      </div>
+
+      <div
+        :class="[
+          'sm:hidden fixed inset-0 z-10 transition-all duration-300 ease-in-out',
+          isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        ]"
+      >
+        <div
+          class="absolute inset-0 bg-black bg-opacity-50"
+          @click="closeMenu"
+        ></div>
+
+        <div
+          :class="[
+            'absolute top-0 left-0 w-full bg-[#e1eaff] shadow-lg transform transition-transform duration-300 ease-in-out',
+            isMenuOpen ? 'translate-y-0' : '-translate-y-full'
+          ]"
+          style="padding-top: 88px;"
+        >
+          <div class="wrapper">
+            <ul class="py-6 space-y-4">
+              <li v-for="item in navItems" :key="item.name">
+                <router-link
+                  :to="item.path"
+                  class="block text-gray-900 font-semibold text-lg py-2 px-4 rounded-lg hover:bg-white hover:text-primaryColor transition duration-300 ease-in-out"
+                  @click="closeMenu"
+                >
+                  {{ item.name }}
+                </router-link>
+              </li>
+            </ul>
+
+            <div class="pb-6 px-4">
+              <div class="w-full">
+                <Search v-model="searchTerm" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Banner Header -->
     <div v-if="route.name !== 'home'" class="relative">
       <img
         src="/bg-header.jpg"
@@ -108,8 +135,9 @@
             <router-link
               to="/"
               class="hover:text-primaryColor transition"
-              >Trang chủ</router-link
             >
+              Trang chủ
+            </router-link>
             <span class="mx-1"> >> </span>
             <span>{{ route.meta.breadcrumb }}</span>
           </span>
@@ -120,7 +148,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Phone, Mail, MapPin } from 'lucide-vue-next';
 import Search from '@/components/user/search.vue';
@@ -141,10 +169,34 @@ const navItems = [
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
+  document.body.style.overflow = isMenuOpen.value ? 'hidden' : '';
 };
 
 const closeMenu = () => {
   isMenuOpen.value = false;
+  document.body.style.overflow = '';
 };
-</script>
 
+const handleResize = () => {
+  if (window.innerWidth >= 640 && isMenuOpen.value) {
+    closeMenu();
+  }
+};
+
+const handleEscape = (event: KeyboardEvent) => {
+  if (event.key === 'Escape' && isMenuOpen.value) {
+    closeMenu();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+  window.addEventListener('keydown', handleEscape);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
+  window.removeEventListener('keydown', handleEscape);
+  document.body.style.overflow = '';
+});
+</script>
